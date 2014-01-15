@@ -93,6 +93,16 @@ And /^I edit an Account with a Sub-Fund Group Code of (.*)/ do |sub_fund_group_c
   end
 end
 
+And /^I edit an Account with a Sub-Fund Program Code$/ do
+  visit(MainPage).account
+  on AccountLookupPage do |page|
+    page.subfund_program_code.set '*'
+    page.search
+    page.edit_random
+  end
+end
+
+
 When /^I enter (.*) as an invalid Major Reporting Category Code$/  do |major_reporting_category_code|
   on AccountPage do |page|
     @account = make AccountObject
@@ -168,6 +178,15 @@ And /^I edit an Account$/ do
   on AccountPage do |page|
     @account = make AccountObject
     page.description.set random_alphanums(40, 'AFT')
+    @account.document_id = page.document_id
+  end
+end
+
+When /^I enter a lowercase Sub-Fund Program Code$/ do
+  on AccountPage do |page|
+    @account = make AccountObject
+    page.description.set random_alphanums(40, 'AFT')
+    page.subfund_program_code.set page.subfund_program_code.value.downcase
     @account.document_id = page.document_id
   end
 end

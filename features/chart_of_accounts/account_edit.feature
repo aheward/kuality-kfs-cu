@@ -43,3 +43,11 @@ Feature: Account Edit
     And   I edit an Account
     When  I blanket approve the Account
     Then  the Account Maintenance Document goes to PROCESSED
+
+  @KFSQA-599 @wip
+  Scenario: Create an Account with a lowercase Sub-Fund Program Code
+    Given I am logged in as a KFS Chart Manager
+    And   I edit an Account with a Sub-Fund Program Code
+    And   I enter a lowercase Sub-Fund Program Code
+    When  I submit the Account
+    Then  the Account Maintenance Document goes to ENROUTE
